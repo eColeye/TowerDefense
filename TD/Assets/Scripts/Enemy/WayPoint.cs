@@ -5,6 +5,7 @@ using System.Linq;
 
 public class WayPoint : MonoBehaviour
 {
+    private float hp = 1f;
     private Transform[] waypoints;
     private Transform parent;
     public float speed = 300.0f;
@@ -16,12 +17,17 @@ public class WayPoint : MonoBehaviour
         parent = GameObject.Find("WayPoints").transform;
         waypoints = parent.GetComponentsInChildren<Transform>();
         waypoints = waypoints.Where(t => t != transform).ToArray();
-        Debug.Log("waypoints lenght = " + waypoints.Length);
+        //Debug.Log("waypoints lenght = " + waypoints.Length);
+    }
+
+    public void gotHit(float dmg)
+    {
+        hp -= dmg;
     }
 
     private void Update()
     {
-        if (GameManager.PlayerHP <= 0)
+        if (GameManager.PlayerHP <= 0 || hp <= 0)
         {
             Destroy(gameObject);
         }
