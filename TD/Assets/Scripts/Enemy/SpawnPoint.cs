@@ -5,7 +5,6 @@ using UnityEngine;
 public class SpawnPoint : MonoBehaviour
 {
     public GameObject soldier;
-    public Canvas canvas;
     public Transform spawnPoint;
 
     private void Start()
@@ -19,8 +18,7 @@ public class SpawnPoint : MonoBehaviour
         if(GameManager.PlayerHP != 0)
         {
             GameObject newSoldier = Instantiate(soldier);
-            newSoldier.transform.SetParent(canvas.transform, false);
-            RectTransform rt = newSoldier.GetComponent<RectTransform>();
+            Transform rt = newSoldier.GetComponent<Transform>();
             rt.position = new Vector3(spawnPoint.position.x, spawnPoint.position.y, 0);
         }
         else
