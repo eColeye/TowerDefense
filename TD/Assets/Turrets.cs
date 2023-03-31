@@ -33,12 +33,23 @@ public class Turrets : MonoBehaviour
             {
                 Debug.DrawLine(transform.position, col.transform.position, Color.red);
 
-            if (colMax == null || colMax.GetComponent<WayPoint>().distanceVal <= col.GetComponent<WayPoint>().distanceVal)
+                Debug.Log("=null");
+                if (colMax == null)
                 {
                     colMax = col;
-                    doRatate(colMax);
+                    Debug.Log("=null");
                 }
+                else if(colMax.GetComponent<WayPoint>().distanceVal <= col.GetComponent<WayPoint>().distanceVal) 
+                {
+                    colMax = col;
+                    Debug.Log("=max");
+                }
+                Debug.Log("=end");
             }
+        }
+        if(colMax!= null)
+        {
+            doRatate(colMax);
         }
         if (colMax != null && coolDownCounter >= attackSpeed)
         {
@@ -68,11 +79,9 @@ public class Turrets : MonoBehaviour
             blast.SetActive(false);
         }
 
-        DoHit();
         if (coolDownCounter < attackSpeed)
         {
             coolDownCounter = coolDownCounter + Time.deltaTime;
-            //Debug.Log("Timer = " + coolDownCounter);
         }
     }
 }

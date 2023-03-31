@@ -9,6 +9,7 @@ public class Rocket : MonoBehaviour
     private float blastRadius;
     private float speed;
     private int i = 0;
+    private float lifeTime = 5f;
 
     private void OnDrawGizmos()
     {
@@ -40,14 +41,18 @@ public class Rocket : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        Debug.Log("Collision hit " + i);
+        DoHit();
+        Destroy(this.gameObject);
+    }
+
     public void Update()
     {
         transform.position = Vector3.MoveTowards(transform.position, collider.transform.position, speed * Time.deltaTime);
-        if (Vector3.Distance(transform.position, collider.transform.position) <= 0.05f)
-        {
-            DoHit();
-            Debug.Log("Hit " + i);
-            Destroy(this.gameObject);
-        }
+
+        lifeTime -= Time.deltaTime;
+        if (lifeTime <= 0){Destroy(this.gameObject);}
     }
 }

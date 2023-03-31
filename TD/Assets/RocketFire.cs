@@ -32,14 +32,20 @@ public class RocketFire : MonoBehaviour
             {
                 Debug.DrawLine(transform.position, col.transform.position, Color.red);
 
-                if (colMax == null || colMax.GetComponent<WayPoint>().distanceVal <= col.GetComponent<WayPoint>().distanceVal)
+                if (colMax == null)
                 {
                     colMax = col;
-                    doRatate(colMax);
+                }
+                else if (colMax.GetComponent<WayPoint>().distanceVal <= col.GetComponent<WayPoint>().distanceVal) 
+                {
+                    colMax = col;                    
                 }
             }
         }
-
+        if (colMax != null)
+        {
+            doRatate(colMax);
+        }
         if (colMax != null && coolDownCounter >= attackSpeed)
         {
             GameObject newRocket = Instantiate(rocket);

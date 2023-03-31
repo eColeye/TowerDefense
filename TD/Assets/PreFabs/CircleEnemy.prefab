@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+  distanceVal: 0
 --- !u!50 &8613542937809898364
 Rigidbody2D:
   serializedVersion: 4
@@ -81,9 +82,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.01880564, y: 0.016924653}
+  m_Offset: {x: -0.007965088, y: 0.012978926}
   serializedVersion: 2
-  m_Radius: 0.4717912
+  m_Radius: 0.23804606
 --- !u!212 &-1341343334018963900
 SpriteRenderer:
   m_ObjectHideFlags: 0
