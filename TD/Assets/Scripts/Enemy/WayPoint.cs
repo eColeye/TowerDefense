@@ -8,7 +8,9 @@ public class WayPoint : MonoBehaviour
     private float hp = 1f;
     private Transform[] waypoints;
     private Transform parent;
-    public float speed = 300.0f;
+    public float speed = 2.0f;
+
+    public float distanceVal = 0f;
 
     private int currentWaypoint = 1;
 
@@ -27,11 +29,13 @@ public class WayPoint : MonoBehaviour
 
     private void Update()
     {
+        distanceVal += Time.deltaTime * speed;
+
         if (GameManager.PlayerHP <= 0 || hp <= 0)
         {
             Destroy(gameObject);
         }
-        if (currentWaypoint < waypoints.Length)
+        else if (currentWaypoint < waypoints.Length)
         {
             transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypoint].position, speed * Time.deltaTime);
 
