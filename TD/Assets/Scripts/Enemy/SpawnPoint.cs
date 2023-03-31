@@ -6,10 +6,11 @@ public class SpawnPoint : MonoBehaviour
 {
     public GameObject soldier;
     public Transform spawnPoint;
+    public float spawnRate = 1f;
 
     private void Start()
     {
-        InvokeRepeating("SpawnObject", 1f, 1f);
+        InvokeRepeating("SpawnObject", spawnRate, spawnRate);
     }
 
 

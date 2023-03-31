@@ -8,6 +8,7 @@ public class Turrets : MonoBehaviour
 {
     private float coolDownCounter = 2.0f;
     public float dmg = 2.0f;
+    public  GameObject blast;
 
     public float attackRange = 1f;
     public float attackSpeed = 2.0f;
@@ -41,6 +42,7 @@ public class Turrets : MonoBehaviour
         }
         if (colMax != null && coolDownCounter >= attackSpeed)
         {
+            blast.SetActive(true);
             colMax.GetComponent<WayPoint>().gotHit(dmg);
             coolDownCounter = 0;
             colMax = null;
@@ -61,6 +63,10 @@ public class Turrets : MonoBehaviour
 
     private void Update()
     {
+        if(coolDownCounter > 0.2f)
+        {
+            blast.SetActive(false);
+        }
 
         DoHit();
         if (coolDownCounter < attackSpeed)
