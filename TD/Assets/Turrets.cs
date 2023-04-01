@@ -19,51 +19,27 @@ public class Turrets : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+
     }
 
+    //Called when an attack can happen. Attacks first target
     private void DoHit()
-    {           
-        Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, attackRange);
-        Collider2D colMax = null;
-
-
-        foreach (Collider2D col in cols)
-        {
-            if(col != null)
-            {
-                Debug.DrawLine(transform.position, col.transform.position, Color.red);
-
-                Debug.Log("=null");
-                if (colMax == null)
-                {
-                    colMax = col;
-                    Debug.Log("=null");
-                }
-                else if(colMax.GetComponent<WayPoint>().distanceVal <= col.GetComponent<WayPoint>().distanceVal) 
-                {
-                    colMax = col;
-                    Debug.Log("=max");
-                }
-                Debug.Log("=end");
-            }
-        }
-        if(colMax!= null)
-        {
-            doRatate(colMax);
-        }
+    {
+        Collider2D colMax = getMax();
+        
         if (colMax != null && coolDownCounter >= attackSpeed)
         {
+            doRatate(colMax);
             blast.SetActive(true);
             colMax.GetComponent<WayPoint>().gotHit(dmg);
             coolDownCounter = 0;
-            colMax = null;
             return;
-        }   
+        }
     }
 
     //Take x and y component to find z angle. Then rotates 
     private void doRatate(Collider2D col)
-    {      
+    {
         float y = col.transform.position.y - transform.position.y;
         float x = col.transform.position.x - transform.position.x;
 
@@ -71,10 +47,34 @@ public class Turrets : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, 0f, angle - 90f);
     }
 
+    //From the [] of colliders in attackRange and get the one which has traveled the longest distance
+    private Collider2D getMax()
+    {
+        Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, attackRange);
+        Collider2D colMax = null;
+
+
+        foreach (Collider2D col in cols)
+        {
+            if (col != null)
+            {
+                if (colMax == null)
+                {
+                    colMax = col;
+                }
+                else if (colMax.GetComponent<WayPoint>().distanceVal <= col.GetComponent<WayPoint>().distanceVal)
+                {
+                    colMax = col;
+                }
+            }
+        }
+        return colMax;
+    }
+
 
     private void Update()
     {
-        if(coolDownCounter > 0.2f)
+        if (coolDownCounter > 0.2f)
         {
             blast.SetActive(false);
         }
@@ -82,6 +82,10 @@ public class Turrets : MonoBehaviour
         if (coolDownCounter < attackSpeed)
         {
             coolDownCounter = coolDownCounter + Time.deltaTime;
+        }
+        else
+        {
+            DoHit();
         }
     }
 }

@@ -17,45 +17,25 @@ public class RocketFire : MonoBehaviour
     //During runtime draws sphere. Switch to OnDrawGizmosSelected wanted only when selected
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 
+    //Called when an attack can happen. Attacks first target
     private void DoHit()
     {
         Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, attackRange);
-        Collider2D colMax = null;
+        Collider2D colMax = getMax();
 
-        foreach (Collider2D col in cols)
-        {
-            if (col != null)
-            {
-                Debug.DrawLine(transform.position, col.transform.position, Color.red);
-
-                if (colMax == null)
-                {
-                    colMax = col;
-                }
-                else if (colMax.GetComponent<WayPoint>().distanceVal <= col.GetComponent<WayPoint>().distanceVal) 
-                {
-                    colMax = col;                    
-                }
-            }
-        }
-        if (colMax != null)
-        {
-            doRatate(colMax);
-        }
         if (colMax != null && coolDownCounter >= attackSpeed)
         {
+            doRatate(colMax);
             GameObject newRocket = Instantiate(rocket);
             Transform rt = newRocket.GetComponent<Transform>();
             rt.position = new Vector3(transform.position.x, transform.position.y, 0);
 
             rt.GetComponent<Rocket>().Shoot(colMax, dmg, blastRadius, rocketSpeed);
             coolDownCounter = 0;
-            colMax = null;
-            return;
         }
     }
 
@@ -69,6 +49,29 @@ public class RocketFire : MonoBehaviour
         transform.rotation = Quaternion.Euler(0f, 0f, angle - 90f);
     }
 
+    //From the [] of colliders in attackRange and get the one which has traveled the longest distance
+    private Collider2D getMax()
+    {
+        Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, attackRange);
+        Collider2D colMax = null;
+
+
+        foreach (Collider2D col in cols)
+        {
+            if (col != null)
+            {
+                if(colMax== null)
+                {
+                    colMax = col; 
+                }
+                else if (colMax.GetComponent<WayPoint>().distanceVal <= col.GetComponent<WayPoint>().distanceVal)
+                {
+                    colMax = col;
+                }
+            }
+        }
+        return colMax;
+    }
 
     private void Update()
     {

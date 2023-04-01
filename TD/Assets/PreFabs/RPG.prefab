@@ -71,7 +71,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 18
   m_Sprite: {fileID: -8922803724958099555, guid: 576e8467e5541b447b5adb33d656a3c3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -95,9 +95,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83fdcd7b3932d324993b65b4353c1834, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmg: 2
+  dmg: 5
   rocket: {fileID: 6360331803805172726, guid: eb7f828b539359b40a08ec3028487477, type: 3}
-  attackRange: 1
-  blastRadius: 1
-  rocketSpeed: 1
-  attackSpeed: 2
+  attackRange: 3.5
+  blastRadius: 1.5
+  rocketSpeed: 7
+  attackSpeed: 4

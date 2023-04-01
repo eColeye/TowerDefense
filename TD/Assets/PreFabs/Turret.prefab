@@ -178,7 +178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d96d177e58304849b53f2c964ecf040, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmg: 2
+  dmg: 1
   blast: {fileID: 5593052747361485555}
   attackRange: 3
-  attackSpeed: 2
+  attackSpeed: 1

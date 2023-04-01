@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Rocket : MonoBehaviour
 {
-    private Collider2D collider;
+    private Collider2D target;
     private float damage;
     private float blastRadius;
     private float speed;
@@ -21,7 +21,7 @@ public class Rocket : MonoBehaviour
     public void Shoot(Collider2D col, float dmg, float blast, float spd)
     {
         Debug.Log("SHOOT");
-        collider = col;
+        target = col;
         damage = dmg;
         blastRadius = blast;
         speed = spd;
@@ -48,11 +48,29 @@ public class Rocket : MonoBehaviour
         Destroy(this.gameObject);
     }
 
+    private void aim()
+    {
+        float y = target.transform.position.y - transform.position.y;
+        float x = target.transform.position.x - transform.position.x;
+
+        float angle = Mathf.Atan2(y, x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f, 0f, angle - 90f);
+    }
+
     public void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, collider.transform.position, speed * Time.deltaTime);
+        if(target == null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+            lifeTime -= Time.deltaTime;
+            aim();
+        }        
 
-        lifeTime -= Time.deltaTime;
+        //Each object has a max lifeline 
         if (lifeTime <= 0){Destroy(this.gameObject);}
     }
 }
