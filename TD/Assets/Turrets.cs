@@ -26,19 +26,22 @@ public class Turrets : MonoBehaviour
     private void DoHit()
     {
         Collider2D colMax = getMax();
-        
-        if (colMax != null && coolDownCounter >= attackSpeed)
+        try
         {
-            doRatate(colMax);
+            if (colMax != null && coolDownCounter >= attackSpeed)
+            {
+            doRotate(colMax);
             blast.SetActive(true);
             colMax.GetComponent<WayPoint>().gotHit(dmg);
             coolDownCounter = 0;
             return;
+            }
+        }catch(System.NullReferenceException){
         }
     }
 
     //Take x and y component to find z angle. Then rotates 
-    private void doRatate(Collider2D col)
+    private void doRotate(Collider2D col)
     {
         float y = col.transform.position.y - transform.position.y;
         float x = col.transform.position.x - transform.position.x;
@@ -56,16 +59,23 @@ public class Turrets : MonoBehaviour
 
         foreach (Collider2D col in cols)
         {
-            if (col != null)
+            try
             {
-                if (colMax == null)
+                if (col != null)
                 {
-                    colMax = col;
+                    if(colMax== null)
+                    {
+                        colMax = col; 
+                    }
+                    else if (colMax.GetComponent<WayPoint>().distanceVal <= col.GetComponent<WayPoint>().distanceVal)
+                    {
+                        colMax = col;
+                    }
                 }
-                else if (colMax.GetComponent<WayPoint>().distanceVal <= col.GetComponent<WayPoint>().distanceVal)
-                {
-                    colMax = col;
-                }
+                            
+            }
+            catch (System.NullReferenceException)
+            {               
             }
         }
         return colMax;
