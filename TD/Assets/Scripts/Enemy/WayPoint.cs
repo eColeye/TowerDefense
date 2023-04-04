@@ -9,6 +9,7 @@ public class WayPoint : MonoBehaviour
     private Transform[] waypoints;
     private Transform parent;
     public float speed = 2.0f;
+    private float hitTime;
 
     public float distanceVal = 0f;
 
@@ -19,17 +20,23 @@ public class WayPoint : MonoBehaviour
         parent = GameObject.Find("WayPoints").transform;
         waypoints = parent.GetComponentsInChildren<Transform>();
         waypoints = waypoints.Where(t => t != transform).ToArray();
-        //Debug.Log("waypoints lenght = " + waypoints.Length);
     }
 
     public void gotHit(float dmg)
     {
+        transform.GetComponent<SpriteRenderer>().color = Color.red;
         hp -= dmg;
+        hitTime = Time.time;
     }
 
     private void Update()
     {
         distanceVal += Time.deltaTime * speed;
+
+        if(hitTime <= Time.time -0.1f){
+            transform.GetComponent<SpriteRenderer>().color = Color.white;
+
+        } 
 
         if (GameManager.PlayerHP <= 0 || hp <= 0)
         {
