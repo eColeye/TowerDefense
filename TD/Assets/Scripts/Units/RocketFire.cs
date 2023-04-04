@@ -88,10 +88,7 @@ public class RocketFire : MonoBehaviour
     private void Update()
     {
         DoHit();
-        if(coolDownCounter <= attackSpeed/2f){
-            shot.SetActive(true);
-        }
-
+        if(coolDownCounter >= attackSpeed/3f){shot.SetActive(true);}
 
         if (coolDownCounter < attackSpeed)
         {
