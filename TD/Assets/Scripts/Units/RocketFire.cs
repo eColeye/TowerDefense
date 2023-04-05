@@ -66,7 +66,7 @@ public class RocketFire : MonoBehaviour
         {
             try
             {
-                if (col != null)
+                if (col != null && col.GetComponent<WayPoint>() != null)
                 {
                     if(colMax== null)
                     {
@@ -76,7 +76,8 @@ public class RocketFire : MonoBehaviour
                     {
                         colMax = col;
                     }
-                }                        
+                }
+                            
             }
             catch (System.NullReferenceException)
             {               

@@ -16,12 +16,13 @@ public class OctoSides : MonoBehaviour
 
 
     //During runtime draws sphere. Switch to OnDrawGizmosSelected wanted only when selected
-    // private void OnDrawGizmos()
-    // {
-    //     Gizmos.color = Color.red;
-    //     Gizmos.DrawWireSphere(transform.position, attackRange);
+    private void OnDrawGizmos()
+    {
+        //Color newColor = new Color(1, 0.92f, 0.016f, 1);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
 
-    // }
+    }
 
     //Called when an attack can happen. Attacks first target
     private void DoHit()

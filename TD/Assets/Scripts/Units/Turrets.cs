@@ -61,7 +61,7 @@ public class Turrets : MonoBehaviour
         {
             try
             {
-                if (col != null)
+                if (col != null && col.GetComponent<WayPoint>() != null)
                 {
                     if(colMax== null)
                     {
