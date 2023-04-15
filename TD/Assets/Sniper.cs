@@ -28,11 +28,15 @@ public class Sniper : MonoBehaviour
         {
             if (colMax != null && coolDownCounter >= attackSpeed)
             {
-            doRotate(colMax);
-            blast.SetActive(true);
-            colMax.GetComponent<WayPoint>().gotHit(dmg);
-            coolDownCounter = 0;
-            return;
+                doRotate(colMax);
+                blast.SetActive(true);
+                colMax.GetComponent<WayPoint>().gotHit(dmg);
+                coolDownCounter = 0;
+                return;
+            }
+            else
+            {
+                doRotate(colMax);
             }
         }catch(System.NullReferenceException){
         }
@@ -86,14 +90,7 @@ public class Sniper : MonoBehaviour
         {
             blast.SetActive(false);
         }
-
-        if (coolDownCounter < attackSpeed)
-        {
-            coolDownCounter = coolDownCounter + Time.deltaTime;
-        }
-        else
-        {
-            DoHit();
-        }
+        coolDownCounter = coolDownCounter + Time.deltaTime;
+        DoHit();
     }
 }

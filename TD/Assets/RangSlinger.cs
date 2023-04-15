@@ -24,24 +24,40 @@ public class RangSlinger : MonoBehaviour
     private void DoHit()
     {
         Collider2D col = getMax();
-        if (coolDownCounter >= attackSpeed && col != null)
+        try
         {
-            //Grabs x,y component. Rotate object and store x, y
             float y = col.transform.position.y - transform.position.y;
             float x = col.transform.position.x - transform.position.x;
+            if (coolDownCounter >= attackSpeed && col != null)
+            {
+                DoRotate(x, y);
 
-            float angle = Mathf.Atan2(y, x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(0f, 0f, angle -90f);
+                //Send projectile
+                GameObject newRang = Instantiate(rang);
+                Transform rt = newRang.GetComponent<Transform>();
+                rt.position = new Vector3(transform.position.x, transform.position.y, 0);
+                rt.GetComponent<Rang>().Shoot(rangSpeed, dmg, attackRange, x, y);
 
-            //Send projectile
-            GameObject newRang = Instantiate(rang);
-            Transform rt = newRang.GetComponent<Transform>();
-            rt.position = new Vector3(transform.position.x, transform.position.y, 0);
-            rt.GetComponent<Rang>().Shoot(rangSpeed, dmg, attackRange, x, y, angle);
-
-            coolDownCounter = 0;
-            return;
+                coolDownCounter = 0;
+                return;
+            }
+            else
+            {
+                //constantly look at target while on cooldown
+                DoRotate(x, y);               
+            }
         }
+        catch(System.NullReferenceException)
+        {
+
+        }
+    }
+
+    //Grabs x,y component. Rotate object and store x, y
+    private void DoRotate(float x, float y)
+    {
+        float angle = Mathf.Atan2(y, x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f, 0f, angle -90f);
     }
 
     //From the [] of colliders in attackRange and get the one which has traveled the longest distance
@@ -77,14 +93,7 @@ public class RangSlinger : MonoBehaviour
 
     private void Update()
     {
-
-        if (coolDownCounter < attackSpeed)
-        {
-            coolDownCounter = coolDownCounter + Time.deltaTime;
-        }
-        else
-        {
-            DoHit();
-        }
+        coolDownCounter = coolDownCounter + Time.deltaTime;
+        DoHit();
     }
 }

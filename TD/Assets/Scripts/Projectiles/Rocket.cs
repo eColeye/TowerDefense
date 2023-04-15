@@ -20,7 +20,6 @@ public class Rocket : MonoBehaviour
 
     public void Shoot(Collider2D col, float dmg, float blast, float spd)
     {
-        Debug.Log("SHOOT");
         target = col;
         damage = dmg;
         blastRadius = blast;
@@ -43,7 +42,6 @@ public class Rocket : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        Debug.Log("Collision hit " + i);
         DoHit();
         Destroy(this.gameObject);
     }

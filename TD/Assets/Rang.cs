@@ -15,7 +15,7 @@ public class Rang : MonoBehaviour
     private bool end = false;
 
 
-    public void Shoot(float spd, float dmg, float rng, float _x, float _y, float _angle)
+    public void Shoot(float spd, float dmg, float rng, float _x, float _y)
     {        
         range = rng;
         speed = spd;

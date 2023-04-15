@@ -33,13 +33,17 @@ public class RocketFire : MonoBehaviour
         {
             if (colMax != null && coolDownCounter >= attackSpeed)
             {
-            doRotate(colMax);
-            GameObject newRocket = Instantiate(rocket);
-            Transform rt = newRocket.GetComponent<Transform>();
-            rt.position = new Vector3(transform.position.x, transform.position.y, 0);
-            shot.SetActive(false);
-            rt.GetComponent<Rocket>().Shoot(colMax, dmg, blastRadius, rocketSpeed);
-            coolDownCounter = 0;
+                doRotate(colMax);
+                GameObject newRocket = Instantiate(rocket);
+                Transform rt = newRocket.GetComponent<Transform>();
+                rt.position = new Vector3(transform.position.x, transform.position.y, 0);
+                shot.SetActive(false);
+                rt.GetComponent<Rocket>().Shoot(colMax, dmg, blastRadius, rocketSpeed);
+                coolDownCounter = 0;
+            }
+            else
+            {
+                doRotate(colMax);
             }
         }catch(System.NullReferenceException){
         }
@@ -90,11 +94,6 @@ public class RocketFire : MonoBehaviour
     {
         DoHit();
         if(coolDownCounter >= attackSpeed/3f){shot.SetActive(true);}
-
-        if (coolDownCounter < attackSpeed)
-        {
-            coolDownCounter = coolDownCounter + Time.deltaTime;
-            //Debug.Log("Timer = " + coolDownCounter);
-        }
+        coolDownCounter = coolDownCounter + Time.deltaTime;
     }
 }

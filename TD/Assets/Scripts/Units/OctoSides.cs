@@ -6,7 +6,7 @@ public class OctoSides : MonoBehaviour
 {
     private float coolDownCounter = 100.0f;
     public float dmg = 2.0f;
-    public  GameObject[] blast;
+    public GameObject blast;
     public GameObject bullet;
 
     private bool active;
@@ -30,9 +30,8 @@ public class OctoSides : MonoBehaviour
         if (coolDownCounter >= attackSpeed)
         {
             //Send projectile
-            for(int i = 0 ; i < blast.Length ; i++){
-                blast[i].SetActive(true);
-            }
+            blast.SetActive(true);
+            
             GameObject[] newBullet = new GameObject[8];
             Transform[] rt = new Transform[8];
             for (int i = 0; i < 8; i++)
@@ -53,9 +52,7 @@ public class OctoSides : MonoBehaviour
     {
         if (coolDownCounter > 0.2f && active)
         {
-            for(int i = 0 ; i < blast.Length ; i++){
-                blast[i].SetActive(false);
-            }
+            blast.SetActive(false);
             active = !active;
         }
 

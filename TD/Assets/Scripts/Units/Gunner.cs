@@ -25,21 +25,26 @@ public class Gunner : MonoBehaviour
     private void DoHit()
     {
         Collider2D colMax = getMax();
+        
         try
         {
             if (colMax != null && coolDownCounter >= attackSpeed)
             {
-            doRotate(colMax);
-            if(blastType){
-                blast[0].SetActive(true);
-                blastType = !blastType;
-            }else{
-                blast[1].SetActive(true);
-                blastType = !blastType;
+                doRotate(colMax);
+                if(blastType){
+                    blast[0].SetActive(true);
+                    blastType = !blastType;
+                }else{
+                    blast[1].SetActive(true);
+                    blastType = !blastType;
+                }
+                colMax.GetComponent<WayPoint>().gotHit(dmg);
+                coolDownCounter = 0;
+                return;
             }
-            colMax.GetComponent<WayPoint>().gotHit(dmg);
-            coolDownCounter = 0;
-            return;
+            else
+            {
+              doRotate(colMax);  
             }
         }catch(System.NullReferenceException){
         }
@@ -95,13 +100,8 @@ public class Gunner : MonoBehaviour
             blast[1].SetActive(false);
         }
 
-        if (coolDownCounter < attackSpeed)
-        {
-            coolDownCounter = coolDownCounter + Time.deltaTime;
-        }
-        else
-        {
-            DoHit();
-        }
+        coolDownCounter = coolDownCounter + Time.deltaTime;
+        DoHit();
+        
     }
 }

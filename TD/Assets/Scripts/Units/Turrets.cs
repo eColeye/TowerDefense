@@ -30,11 +30,15 @@ public class Turrets : MonoBehaviour
         {
             if (colMax != null && coolDownCounter >= attackSpeed)
             {
-            doRotate(colMax);
-            blast.SetActive(true);
-            colMax.GetComponent<WayPoint>().gotHit(dmg);
-            coolDownCounter = 0;
-            return;
+                doRotate(colMax);
+                blast.SetActive(true);
+                colMax.GetComponent<WayPoint>().gotHit(dmg);
+                coolDownCounter = 0;
+                return;
+            }
+            else 
+            {
+                doRotate(colMax);
             }
         }catch(System.NullReferenceException){
         }
@@ -81,7 +85,6 @@ public class Turrets : MonoBehaviour
         return colMax;
     }
 
-
     private void Update()
     {
         if (coolDownCounter > 0.2f)
@@ -89,13 +92,7 @@ public class Turrets : MonoBehaviour
             blast.SetActive(false);
         }
 
-        if (coolDownCounter < attackSpeed)
-        {
-            coolDownCounter = coolDownCounter + Time.deltaTime;
-        }
-        else
-        {
-            DoHit();
-        }
+        coolDownCounter = coolDownCounter + Time.deltaTime;
+        DoHit();
     }
 }
