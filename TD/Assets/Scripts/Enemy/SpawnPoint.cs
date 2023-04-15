@@ -5,16 +5,13 @@ using UnityEngine;
 public class SpawnPoint : MonoBehaviour
 {
     public GameObject soldier;
+
     public Transform spawnPoint;
     public float spawnRate = 1f;
-
-    private void Start()
-    {
-        InvokeRepeating("SpawnObject", spawnRate, spawnRate);
-    }
+    private float spawnCounter = 0f;
 
 
-    void SpawnObject()
+    private void SpawnObject()
     {
         if(GameManager.PlayerHP != 0)
         {
@@ -26,6 +23,18 @@ public class SpawnPoint : MonoBehaviour
         {
             CancelInvoke("SpawnObject");
         }
-        //Debug.Log("Spawning");
+    }
+
+    private void Update ()
+    {
+        if (!GameManager.Paused)
+        {
+            spawnCounter = spawnCounter + Time.deltaTime;
+            if(spawnCounter >= spawnRate)
+            {
+                SpawnObject();
+                spawnCounter = 0f;
+            }
+        }
     }
 }
