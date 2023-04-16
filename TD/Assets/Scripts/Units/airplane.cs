@@ -35,7 +35,6 @@ public class airplane : MonoBehaviour
 
     private void doShot()
     {
-        Debug.Log("doShoot");
         Collider2D max = getMax();
         if(max != null)
         {
