@@ -12,6 +12,8 @@ public class Gunner : MonoBehaviour
     public float attackRange = 1f;
     public float attackSpeed = 2.0f;
 
+    public bool active = false;
+
 
     //During runtime draws sphere. Switch to OnDrawGizmosSelected wanted only when selected
     private void OnDrawGizmos()
@@ -94,14 +96,17 @@ public class Gunner : MonoBehaviour
 
     private void Update()
     {
-        if (coolDownCounter > 0.1f)
+        if (active)
         {
-            blast[0].SetActive(false);
-            blast[1].SetActive(false);
-        }
+            if (coolDownCounter > 0.1f)
+            {
+                blast[0].SetActive(false);
+                blast[1].SetActive(false);
+            }
 
-        coolDownCounter = coolDownCounter + Time.deltaTime;
-        DoHit();
+            coolDownCounter = coolDownCounter + Time.deltaTime;
+            DoHit();
+        }
         
     }
 }

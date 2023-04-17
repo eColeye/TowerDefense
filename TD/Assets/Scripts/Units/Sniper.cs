@@ -11,6 +11,8 @@ public class Sniper : MonoBehaviour
     public float attackRange = 1f;
     public float attackSpeed = 2.0f;
 
+    public bool active = false;
+
 
     //During runtime draws sphere. Switch to OnDrawGizmosSelected wanted only when selected
     private void OnDrawGizmos()
@@ -86,11 +88,14 @@ public class Sniper : MonoBehaviour
 
     private void Update()
     {
-        if (coolDownCounter > 0.2f)
+        if (active)
         {
-            blast.SetActive(false);
+            if (coolDownCounter > 0.2f)
+            {
+                blast.SetActive(false);
+            }
+            coolDownCounter = coolDownCounter + Time.deltaTime;
+            DoHit();
         }
-        coolDownCounter = coolDownCounter + Time.deltaTime;
-        DoHit();
     }
 }

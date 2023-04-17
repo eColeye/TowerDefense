@@ -54,11 +54,12 @@ public class WayPoint : MonoBehaviour
                 transform.GetComponent<SpriteRenderer>().color = Color.white;
             }
 
-            //Checks if 
+            //Checks if player is defeated
             if (GameManager.PlayerHP <= 0)
             {
                 Destroy(gameObject);
             }
+            //Checks if Enemy is defeated
             else if (hp <= 0)
             {
                 Destroy(gameObject);
@@ -71,10 +72,12 @@ public class WayPoint : MonoBehaviour
                 Reload();
 
             }
+            //Checks if there are more waypoints
             else if (currentWaypoint < waypoints.Length)
             {
                 transform.position = Vector3.MoveTowards(transform.position, waypoints[currentWaypoint].position, speed * Time.deltaTime);
 
+                //Checks if reached waypoint
                 if (Vector3.Distance(transform.position, waypoints[currentWaypoint].position) <= 0.05f)
                 {
                     currentWaypoint++;

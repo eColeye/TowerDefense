@@ -8,10 +8,12 @@ public class Turrets : MonoBehaviour
 {
     private float coolDownCounter = 2.0f;
     public float dmg = 2.0f;
-    public  GameObject blast;
+    public GameObject blast;
 
     public float attackRange = 1f;
     public float attackSpeed = 2.0f;
+
+    public bool active = false;
 
 
     //During runtime draws sphere. Switch to OnDrawGizmosSelected wanted only when selected
@@ -19,7 +21,6 @@ public class Turrets : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
-
     }
 
     //Called when an attack can happen. Attacks first target
@@ -87,12 +88,15 @@ public class Turrets : MonoBehaviour
 
     private void Update()
     {
-        if (coolDownCounter > 0.2f)
+        if (active)
         {
-            blast.SetActive(false);
-        }
+            if (coolDownCounter > 0.2f)
+            {
+                blast.SetActive(false);
+            }
 
-        coolDownCounter = coolDownCounter + Time.deltaTime;
-        DoHit();
+            coolDownCounter = coolDownCounter + Time.deltaTime;
+            DoHit();
+        }
     }
 }

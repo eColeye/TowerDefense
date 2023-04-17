@@ -12,6 +12,7 @@ public class RangSlinger : MonoBehaviour
     public float attackSpeed = 2.0f;
     public float rangSpeed = 1f;
 
+    public bool active = false;
 
     //During runtime draws sphere. Switch to OnDrawGizmosSelected wanted only when selected
     private void OnDrawGizmos()
@@ -93,7 +94,10 @@ public class RangSlinger : MonoBehaviour
 
     private void Update()
     {
-        coolDownCounter = coolDownCounter + Time.deltaTime;
-        DoHit();
+        if (active)
+        {
+            coolDownCounter = coolDownCounter + Time.deltaTime;
+            DoHit();
+        }
     }
 }

@@ -9,10 +9,11 @@ public class OctoSides : MonoBehaviour
     public GameObject blast;
     public GameObject bullet;
 
-    private bool active;
     public float attackRange = 1f;
     public float attackSpeed = 2.0f;
     public float bulletSpeed = 1f;
+
+    public bool active = false;
 
 
     //During runtime draws sphere. Switch to OnDrawGizmosSelected wanted only when selected
@@ -50,19 +51,22 @@ public class OctoSides : MonoBehaviour
 
     private void Update()
     {
-        if (coolDownCounter > 0.2f && active)
+        if (active)
         {
-            blast.SetActive(false);
-            active = !active;
-        }
+            if (coolDownCounter > 0.2f && active)
+            {
+                blast.SetActive(false);
+                active = !active;
+            }
 
-        if (coolDownCounter < attackSpeed)
-        {
-            coolDownCounter = coolDownCounter + Time.deltaTime;
-        }
-        else
-        {
-            DoHit();
+            if (coolDownCounter < attackSpeed)
+            {
+                coolDownCounter = coolDownCounter + Time.deltaTime;
+            }
+            else
+            {
+                DoHit();
+            }
         }
     }
 }

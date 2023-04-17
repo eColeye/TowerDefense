@@ -14,6 +14,8 @@ public class RocketFire : MonoBehaviour
     public float rocketSpeed = 1f;
     public float attackSpeed = 2.0f;
 
+    public bool active = false;
+
 
     //During runtime draws sphere. Switch to OnDrawGizmosSelected wanted only when selected
     private void OnDrawGizmos()
@@ -92,8 +94,11 @@ public class RocketFire : MonoBehaviour
 
     private void Update()
     {
-        DoHit();
-        if(coolDownCounter >= attackSpeed/3f){shot.SetActive(true);}
-        coolDownCounter = coolDownCounter + Time.deltaTime;
+        if(active)
+        {
+            DoHit();
+            if (coolDownCounter >= attackSpeed / 3f) { shot.SetActive(true); }
+            coolDownCounter = coolDownCounter + Time.deltaTime;
+        }
     }
 }

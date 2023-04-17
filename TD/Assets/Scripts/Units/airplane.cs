@@ -16,7 +16,9 @@ public class airplane : MonoBehaviour
     public float attackSpeed = 0.2f;
     public float attackCounter = 0f;
     public float bulletSpeed = 1f;
-    
+
+    public bool active = false;
+
     public float damage = 1f;
 
     public float angle = 0f;
@@ -82,24 +84,29 @@ public class airplane : MonoBehaviour
 
     void Update()
     {
-        if(attackCounter >= attackSpeed)
+        if (active)
         {
-            doShot();
-        }else{
-            attackCounter += Time.deltaTime;
+            if (attackCounter >= attackSpeed)
+            {
+                doShot();
+            }
+            else
+            {
+                attackCounter += Time.deltaTime;
+            }
+
+
+
+            angle += planeSpeed * Time.deltaTime;
+
+            plane.transform.rotation = Quaternion.Euler(0f, 0f, angle * Mathf.Rad2Deg + 90f);
+            shadow.transform.rotation = Quaternion.Euler(0f, 0f, angle * Mathf.Rad2Deg + 90f);
+
+            float x = planeFlightradius * Mathf.Cos(angle) + target.position.x;
+            float y = planeFlightradius * Mathf.Sin(angle) + target.position.y;
+
+            plane.transform.position = new Vector3(x, y, plane.transform.position.z);
+            shadow.transform.position = new Vector3(plane.transform.position.x, plane.transform.position.y - 0.75f, plane.transform.position.z);
         }
-
-
-
-        angle += planeSpeed * Time.deltaTime;
-
-        plane.transform.rotation = Quaternion.Euler(0f, 0f, angle * Mathf.Rad2Deg + 90f);
-        shadow.transform.rotation = Quaternion.Euler(0f, 0f, angle * Mathf.Rad2Deg + 90f);
-
-        float x = planeFlightradius * Mathf.Cos(angle) + target.position.x;
-        float y = planeFlightradius * Mathf.Sin(angle) + target.position.y;
-
-        plane.transform.position = new Vector3(x, y, plane.transform.position.z);
-        shadow.transform.position = new Vector3(plane.transform.position.x, plane.transform.position.y - 0.75f, plane.transform.position.z);
     }
 }
