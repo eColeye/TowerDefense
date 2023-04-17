@@ -1,0 +1,147 @@
+Game Ideas
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+General Ideas:
+	What theme am i going for?    (alian envasion??)
+		Army vs. Alian Envasion:
+			Enemies:
+				Alians (Multiple different colors/speeds)
+				Golems? (does this make sense, rocky alians need explosives/fire to break maybe ice??)
+				UFO
+				Speeder? 
+			GamePlay:
+				Unlock new more edvanced alian weapons from each lvl	
+				
+	Who am i wanting to play this?
+	What kind of enemies? simple or complex?
+
+Save after each level for continue
+	Stage: 
+	level:
+	Money:
+	Health:
+	All locations of Units?? (no idea)
+
+Continue: 
+	Needs to load up save state:
+		Money
+		Round counter
+		Health
+		Unit layout
+		Play starts at round
+
+Shop:
+	Buy indevidual Units and place where clicked:
+X		UI
+X		Buttons
+		Buying feature:
+X			Follows cursor
+X			Left click place
+			Cant place on track
+X			Costs Money
+X	Play button:
+X		Maybe Auto play next level?
+	Scrolling for more then 8 Units
+	
+Units:
+	Can click unit (on click)
+		Sell unit
+		Allows to see attack range on click
+		Upgrade units
+		
+
+Spawner:
+X	Spawn set amm of units.
+	Different units random or??
+	Boss
+X	Once all dead end round:
+X		Player can click play
+	Rounds:
+		Set number to beat game?
+		After win stats?
+		Difficultys?
+			health or num of enemies spawn inc?
+
+Runtime:
+X	Money: text
+X	Heath: text
+X	Round: text
+X	Pause: (esc and button)
+X	Remaining : text
+
+
+Unit Ideas:
+	New:
+		FlameThrower
+		Eletric gun
+		Boat (water levels??) 
+		Tank
+		Morter/Airstrike
+
+	Targeting
+		Multiple targeting systems:
+			Most Hp
+			Furthest
+			Targeted
+
+
+
+	Current:
+		Turret:
+			Medium atk speed
+			low attack
+			lowest costing (base unit, free first one?)
+			Currently feels really weak
+			Change:
+				Pircing
+				by UI??
+		Gunner:
+			Very high atk speed
+			Low atk dmg
+			Cost more then turret
+			Currently feels strong 
+		Octo:
+			med atk speed
+			low attack
+			?? feels yes??
+			cost around booma
+		Booma:
+			med atk speed
+			low-med atk dmg
+			feels misses a lot
+			low-med cost around gunner maybe lower
+		Rocket:
+			Low atk speed
+			med-high dmg in aoe
+			High costing (Lower then sniper)
+			fix rocket
+			feels fine. If have good utility would feel good
+			Explosion animation?
+		Plane:
+			High atk speed
+			med-high dmg
+			Low ammounts bought
+			Very expensive
+			Feels very strong but not consistant dmg (if expensive good)
+		Sniper: (maybe turn into a rail gun)
+			Very high dmg
+			Very low atk speed
+			setting to atk highest hp unit?
+			Low ammounts bought
+			Expensive (less then plane)
+			Feels underwhelming. Maybe lightnight element for high dmg aoe?
+
+Upgrades:
+	Ideas:
+		AttackSpeed
+		Range
+		Damage
+		Projectile amm
+		Pirce
+		Tracking
+		Elements (electric/ FIRE / exc)
+		Explosion radius
+		Birst on projectiles
+		
+	
+	
