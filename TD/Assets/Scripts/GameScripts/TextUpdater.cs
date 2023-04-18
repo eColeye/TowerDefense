@@ -41,7 +41,6 @@ public class TextUpdater : MonoBehaviour
         HP.text = "" + GameManager.PlayerHP;
         money.text = "" + GameManager.GameMoney;
         round.text = "Round: " + SpawnPoint.roundCount;
-        Debug.Log("alive = " + SpawnPoint.enemyAlive + " spawning " + SpawnPoint.toSpawn);
         remaining.text = "Remaining: " + (SpawnPoint.enemyAlive + SpawnPoint.toSpawn); 
 
         for (int i = 0; i < shopUnits.Length ; i++)

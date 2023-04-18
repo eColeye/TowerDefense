@@ -7,13 +7,24 @@ public class SpawnPoint : MonoBehaviour
 {
     public GameObject soldier;
 
+    public GameObject[] enemies;
+    /*
+     * 0 : Green
+     * 1 : Blue
+     * 2 : Pink
+     * 3
+     * 4
+     * 5
+     */
+
     public Transform spawnPoint;
-    public float spawnRate = 1f;
     private float spawnCounter = 0f;
 
+    public static float spawnRate = 0.85f;
     public static int roundCount = 1;                      //Counts what round you are at
     public static int enemyAlive = 0;                      //Counts how many enemies are alive at given point
     public static int toSpawn = 0;
+    public static int spawned = 0;
 
     private float timeCounter = 0f;
     private bool timeCount = false;
@@ -25,8 +36,6 @@ public class SpawnPoint : MonoBehaviour
     public void KillEnemy() 
     {
         enemyAlive--;
-
-        Debug.Log("Enemies left = " +  enemyAlive);
         CheckDead();
     }
 
@@ -57,11 +66,13 @@ public class SpawnPoint : MonoBehaviour
     {
         if(GameManager.PlayerHP != 0)
         {
+
             toSpawn--;
-            GameObject newSoldier = Instantiate(soldier);
-            Transform rt = newSoldier.GetComponent<Transform>();
-            rt.position = new Vector3(spawnPoint.position.x, spawnPoint.position.y, 0);
+            GameObject newEnemy = Instantiate(enemies[0]);
+            Transform et = newEnemy.GetComponent<Transform>();
+            et.position = new Vector3(spawnPoint.position.x, spawnPoint.position.y, 0);
             enemyAlive++;
+            spawned++;
         }
     }
 

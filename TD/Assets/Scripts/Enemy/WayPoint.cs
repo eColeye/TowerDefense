@@ -13,6 +13,7 @@ public class WayPoint : MonoBehaviour
 
     public float distanceVal = 0f;          //Calculating the distance object has traveled
     private int currentWaypoint = 1;        //Keeps track of current waypoint
+    private bool left = false;
 
 
 
@@ -31,6 +32,7 @@ public class WayPoint : MonoBehaviour
         Transform parent = GameObject.Find("WayPoints").transform;
         waypoints = parent.GetComponentsInChildren<Transform>();
         waypoints = waypoints.Where(t => t != transform).ToArray();
+        getDirrection();
     }
 
     //Gives dmg to the unit if hit
@@ -39,6 +41,24 @@ public class WayPoint : MonoBehaviour
         transform.GetComponent<SpriteRenderer>().color = Color.red;
         hp -= dmg;
         hitTime = Time.time;
+    }
+
+    public void getDirrection()
+    {
+        float y = waypoints[currentWaypoint].transform.position.y - transform.position.y;
+        float x = waypoints[currentWaypoint].transform.position.x - transform.position.x;
+
+        float angle = Mathf.Atan2(y, x) * Mathf.Rad2Deg;
+        if(270f > Mathf.Abs(angle) && Mathf.Abs(angle) > 90f && !left)
+        {
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            left = true;
+        }
+        else if(left)
+        {
+            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, transform.localScale.z);
+            left = false;
+        }
     }
 
     private void Update()
@@ -64,13 +84,7 @@ public class WayPoint : MonoBehaviour
             {
                 Destroy(gameObject);
                 GameManager.GameMoney += enemyMoneyValue;
-
-                Debug.Log("money is now " + GameManager.GameMoney);
-
-                //reload text?
-
                 Reload();
-
             }
             //Checks if there are more waypoints
             else if (currentWaypoint < waypoints.Length)
@@ -81,6 +95,7 @@ public class WayPoint : MonoBehaviour
                 if (Vector3.Distance(transform.position, waypoints[currentWaypoint].position) <= 0.05f)
                 {
                     currentWaypoint++;
+                    getDirrection();
                 }
             }
             else

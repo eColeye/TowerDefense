@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 
     public static int GameMoney = 5;
 
+    public static int SpawnRateMod = 0;
+
     public static bool Paused = false;
 
     public static bool roundOn = false;
@@ -30,14 +32,23 @@ public class GameManager : MonoBehaviour
         if (!roundOn)
         {
             roundOn = true;
-            int x = SpawnPoint.roundCount * 4 + 3;
+            int x = (int)((SpawnPoint.roundCount * SpawnPoint.roundCount) / 25 + (3.5 * SpawnPoint.roundCount) + 13);
             SpawnPoint.toSpawn = x;
 
-            Debug.Log("toSpawn start = " + x);
+            float y = SpawnPoint.spawnRate - 0.015f;
+            if(y > 0.14f)
+            {
+                SpawnPoint.spawnRate = y;
+            }
+            else
+            {
+                SpawnPoint.spawnRate = 0.14f;
+            }
+
+            Debug.Log("toSpawn start = " + x + " with spawn rate " + SpawnPoint.spawnRate);
         }
         else
         {
-            Debug.Log("AutoPlay started");
             autoPlay = !autoPlay;
         }
 
@@ -47,7 +58,7 @@ public class GameManager : MonoBehaviour
 
     public void CheatMoney()
     {
-        GameMoney += 100;
+        GameMoney += 10000;
         TextUpdater textUpdater = FindObjectOfType<TextUpdater>();
         textUpdater.ReloadText();
     }
