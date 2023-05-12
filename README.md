@@ -1,6 +1,6 @@
 Currently in development
 # Tower Defense
-A basic tower defense that is based off of games likes Bloons Tower Defense. 
+Solo project to create a basic 2d tower defense game, made in unity based off of games like Balloons TD. This is to try to develop more of the difficult skills needed for creating games. For example to improve my game balance skills, creation of multiple unique units which can all be bought, sold, and upgraded, variants of enemies, enemy spawns, creation of save states, with much more.   
 
 ## Unity
 Made with Editor Version 2020.3.43f1 
