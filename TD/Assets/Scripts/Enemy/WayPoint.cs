@@ -5,7 +5,7 @@ using System.Linq;
 
 public class WayPoint : MonoBehaviour
 {
-    private float hp = 1f;                  //Hp of enemy
+    public float hp = 1f;                  //Hp of enemy
     private Transform[] waypoints;          //All waypoints to follow               
     public float speed = 2.0f;              //Speed of enemy
     public int enemyMoneyValue = 1;         //Value of killing enemy
@@ -95,18 +95,19 @@ public class WayPoint : MonoBehaviour
                 if (Vector3.Distance(transform.position, waypoints[currentWaypoint].position) <= 0.05f)
                 {
                     currentWaypoint++;
-                    getDirrection();
+                    if(currentWaypoint < waypoints.Length)
+                    {
+                        getDirrection();
+                    }
                 }
             }
             else
             {
                 // The enemy has reached the end of the path
                 // You can add code here to damage the player's base or remove the enemy from the game
-                GameManager.PlayerHP--;
-
-                Destroy(gameObject);
-
+                GameManager.PlayerHP-= 1;
                 Reload();
+                Destroy(gameObject);
             }
         }
     }

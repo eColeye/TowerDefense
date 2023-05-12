@@ -118,7 +118,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f400e46f13cccea4c91d23438b9f0c0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  hp: 2
+  speed: 1.5
   enemyMoneyValue: 1
   distanceVal: 0
 --- !u!50 &2574398693136913138

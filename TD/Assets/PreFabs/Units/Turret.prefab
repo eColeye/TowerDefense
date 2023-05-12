@@ -49,6 +49,7 @@ MonoBehaviour:
   blast: {fileID: 6628222059767652857}
   attackRange: 3
   attackSpeed: 1
+  active: 0
 --- !u!1 &6628222059354208022
 GameObject:
   m_ObjectHideFlags: 0

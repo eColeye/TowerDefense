@@ -16,6 +16,16 @@ public class GameManager : MonoBehaviour
 
     public static bool autoPlay = false;
 
+    private static int[] SpawnNum = new int[40]
+    {15, 20, 25, 30, 35,
+     40, 45, 50, 55, 60,
+     65, 70, 75, 80, 85,
+     90, 95, 100,105,110,
+     115,120,125,130,135,
+     140,145,150,155,160,
+     165,170,175,180,185,
+     190,195,200,205,210};
+
     public static Dictionary<string, int> unitCost = new Dictionary<string, int>()
     {
         {"Turret", 200},
@@ -29,14 +39,25 @@ public class GameManager : MonoBehaviour
 
     public static void StartRound()
     {
+        Debug.Log("Starting round");
+
         if (!roundOn)
         {
-            roundOn = true;
-            int x = (int)((SpawnPoint.roundCount * SpawnPoint.roundCount) / 25 + (3.5 * SpawnPoint.roundCount) + 13);
-            SpawnPoint.toSpawn = x;
+            //Checks if round is past r40 if so hard set round spawn if past r40 use calculus
+            if(SpawnPoint.roundCount > 40) {
+                roundOn = true;
+                int x = (int)((SpawnPoint.roundCount * SpawnPoint.roundCount) / 25 + (3.5 * SpawnPoint.roundCount) + 13);
+                SpawnPoint.toSpawn = x;
+            }
+            else
+            {
+                roundOn = true;
+                SpawnPoint.toSpawn = SpawnNum[SpawnPoint.roundCount-1];
+            }
 
-            float y = SpawnPoint.spawnRate - 0.015f;
-            if(y > 0.14f)
+            //makes spawning faster each round
+            float y = SpawnPoint.spawnRate - 0.01f;
+            if (y > 0.14f)
             {
                 SpawnPoint.spawnRate = y;
             }
@@ -44,8 +65,6 @@ public class GameManager : MonoBehaviour
             {
                 SpawnPoint.spawnRate = 0.14f;
             }
-
-            Debug.Log("toSpawn start = " + x + " with spawn rate " + SpawnPoint.spawnRate);
         }
         else
         {
@@ -59,6 +78,13 @@ public class GameManager : MonoBehaviour
     public void CheatMoney()
     {
         GameMoney += 10000;
+        TextUpdater textUpdater = FindObjectOfType<TextUpdater>();
+        textUpdater.ReloadText();
+    }
+
+    public void RoundChange(int i)
+    {
+        SpawnPoint.roundCount += i;
         TextUpdater textUpdater = FindObjectOfType<TextUpdater>();
         textUpdater.ReloadText();
     }

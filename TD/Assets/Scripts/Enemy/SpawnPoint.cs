@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,6 +18,21 @@ public class SpawnPoint : MonoBehaviour
      * 5
      */
 
+
+    private string[] waveParts;
+    private bool hasSplit = false;
+    private List<int> keyList = new List<int>();
+    private List<int> spawnList = new List<int>();
+
+    //Stored by     enemy | spawnNum : enemy | spawnNum... 
+    public string[] waveSpawner = new string[5] {
+        "0|15",
+        "0|9:1|1:0|9:1|1",
+        "0|9:1|1:0|5:2|2",
+        "0|9",
+        "0|9"
+    };
+
     public Transform spawnPoint;
     private float spawnCounter = 0f;
 
@@ -28,6 +44,8 @@ public class SpawnPoint : MonoBehaviour
 
     private float timeCounter = 0f;
     private bool timeCount = false;
+    private float spawnRange = 14f;
+
 
     public GameObject[] playButton;
 
@@ -58,21 +76,103 @@ public class SpawnPoint : MonoBehaviour
                 playButton[0].GetComponent<Image>().color = Color.white;
             }
         }
+        hasSplit = false;
+
         TextUpdater textUpdater = FindObjectOfType<TextUpdater>();
         textUpdater.ReloadText();
     }
 
+    private void Split()
+    {
+        Debug.Log("waveSpawner " + waveSpawner[roundCount - 1]);
+        if (roundCount < 5)
+        {
+            waveParts = waveSpawner[roundCount - 1].Split(':');
+            foreach (string part in waveParts)
+            {
+                string[] newPart = part.Split('|');
+                keyList.Add(int.Parse(newPart[0]));
+                spawnList.Add(int.Parse(newPart[1]));
+            }
+
+            Debug.Log("keyList " + keyList[0]);
+            Debug.Log("Spawnlist " + spawnList[0]);
+        }
+        hasSplit = true;
+    }
+
     private void SpawnObject()
     {
-        if(GameManager.PlayerHP != 0)
+        if(GameManager.PlayerHP != 0 && keyList.Count > 0)
         {
+            Debug.Log("IN SPAWN OBJECT");
+            if (spawnList[0] > 0)
+            {
+                SpawnObject(keyList[0]);
+                spawnList[0] -= 1;
 
-            toSpawn--;
-            GameObject newEnemy = Instantiate(enemies[0]);
-            Transform et = newEnemy.GetComponent<Transform>();
-            et.position = new Vector3(spawnPoint.position.x, spawnPoint.position.y, 0);
-            enemyAlive++;
-            spawned++;
+                if(spawnList[0] <= 0)
+                {
+                    keyList.Remove(0);
+                    spawnList.Remove(0);
+                }
+            }
+        }
+        else if(GameManager.PlayerHP != 0 && toSpawn > 0) 
+        {
+            //If mistake was made and need to spawn more. Spawn basic enemies
+            SpawnObject(-1);
+        }
+
+    }
+
+    public void SpawnObject(int key)
+    {
+        switch(key)
+        {
+            case 0:
+                toSpawn--;
+                Instantiate(enemies[key-1], new Vector3(spawnPoint.position.x, spawnPoint.position.y, 0), Quaternion.identity);
+                enemyAlive++;
+                spawned++;
+                return;
+            case 1:
+                toSpawn--;
+                Instantiate(enemies[key - 1], new Vector3(spawnPoint.position.x, spawnPoint.position.y, 0), Quaternion.identity);
+                enemyAlive++;
+                spawned++;
+                return; 
+            case 2:
+                toSpawn--;
+                Instantiate(enemies[key - 1], new Vector3(spawnPoint.position.x, spawnPoint.position.y, 0), Quaternion.identity);
+                enemyAlive++;
+                spawned++;
+                return;
+            case 3:
+                toSpawn--;
+                Instantiate(enemies[key - 1], new Vector3(spawnPoint.position.x, spawnPoint.position.y, 0), Quaternion.identity);
+                enemyAlive++;
+                spawned++;
+                return;
+            case 4:
+                toSpawn--;
+                Instantiate(enemies[key - 1], new Vector3(spawnPoint.position.x, spawnPoint.position.y, 0), Quaternion.identity);
+                enemyAlive++;
+                spawned++;
+                return;
+            case 5:
+                toSpawn--;
+                Instantiate(enemies[key - 1], new Vector3(spawnPoint.position.x, spawnPoint.position.y, 0), Quaternion.identity);
+                enemyAlive++;
+                spawned++;
+                return;
+            default:
+                Debug.Log("IN DEFAULT SPAWN");
+                toSpawn--;
+                Instantiate(enemies[0], new Vector3(spawnPoint.position.x, spawnPoint.position.y, 0), Quaternion.identity);
+                enemyAlive++;
+                spawned++;
+                return;
         }
     }
 
@@ -93,8 +193,11 @@ public class SpawnPoint : MonoBehaviour
 
     private void Update ()
     {
+        //Debug.Log(!GameManager.Paused + "    " + GameManager.roundOn + "    " + toSpawn);
         if (!GameManager.Paused && GameManager.roundOn && toSpawn != 0)
         {
+            if(!hasSplit){Split();}
+
             spawnCounter = spawnCounter + Time.deltaTime;
             if(spawnCounter >= spawnRate)
             {

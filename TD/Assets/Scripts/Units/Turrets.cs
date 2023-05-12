@@ -23,6 +23,14 @@ public class Turrets : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 
+    public void onClick()
+    {
+        Debug.Log("XXX");
+    }
+
+
+
+
     //Called when an attack can happen. Attacks first target
     private void DoHit()
     {

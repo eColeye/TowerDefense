@@ -118,8 +118,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f400e46f13cccea4c91d23438b9f0c0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  enemyMoneyValue: 1
+  hp: 15
+  speed: 1
+  enemyMoneyValue: 5
   distanceVal: 0
 --- !u!50 &796103380590943060
 Rigidbody2D:
