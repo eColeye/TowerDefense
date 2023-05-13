@@ -25,12 +25,47 @@ public class SpawnPoint : MonoBehaviour
     private List<int> spawnList = new List<int>();
 
     //Stored by     enemy | spawnNum : enemy | spawnNum... 
-    public string[] waveSpawner = new string[5] {
+    private string[] waveSpawner = new string[40] {
         "0|15",
         "0|9:1|1:0|9:1|1",
         "0|9:1|1:0|5:2|2",
-        "0|9",
-        "0|9"
+        "0|30",
+        "0|35",
+        "0|40",
+        "0|45",
+        "0|50",
+        "0|55",
+        "0|60",
+        "0|65",
+        "0|70",
+        "0|75",
+        "0|80",
+        "0|85",
+        "0|90",
+        "0|95",
+        "0|100",
+        "0|105",
+        "0|110",
+        "0|115",
+        "0|120",
+        "0|125",
+        "0|130",
+        "0|135",
+        "0|140",
+        "0|145",
+        "0|150",
+        "0|155",
+        "0|160",
+        "0|165",
+        "0|170",
+        "0|175",
+        "0|180",
+        "0|185",
+        "0|190",
+        "0|195",
+        "0|200",
+        "0|205",
+        "0|210",
     };
 
     public Transform spawnPoint;
@@ -75,8 +110,8 @@ public class SpawnPoint : MonoBehaviour
             {
                 playButton[0].GetComponent<Image>().color = Color.white;
             }
+            hasSplit = false;
         }
-        hasSplit = false;
 
         TextUpdater textUpdater = FindObjectOfType<TextUpdater>();
         textUpdater.ReloadText();
@@ -85,7 +120,7 @@ public class SpawnPoint : MonoBehaviour
     private void Split()
     {
         Debug.Log("waveSpawner " + waveSpawner[roundCount - 1]);
-        if (roundCount < 5)
+        if (roundCount <= 40)
         {
             waveParts = waveSpawner[roundCount - 1].Split(':');
             foreach (string part in waveParts)
@@ -113,8 +148,16 @@ public class SpawnPoint : MonoBehaviour
 
                 if(spawnList[0] <= 0)
                 {
-                    keyList.Remove(0);
-                    spawnList.Remove(0);
+                    keyList.Remove(keyList[0]);
+                    spawnList.Remove(spawnList[0]);
+                }
+                if(keyList.Count > 0)
+                {
+                    Debug.Log("Key is " + keyList + " with size of " + keyList.Count + "  spawn is " + spawnList[0]);
+                }       
+                for(int i = 0; i < keyList.Count; i++)
+                {
+                    Debug.Log("keyList has " + keyList[i]);
                 }
             }
         }
@@ -132,37 +175,37 @@ public class SpawnPoint : MonoBehaviour
         {
             case 0:
                 toSpawn--;
-                Instantiate(enemies[key-1], new Vector3(spawnPoint.position.x, spawnPoint.position.y, 0), Quaternion.identity);
+                Instantiate(enemies[key], new Vector3(spawnPoint.position.x, spawnPoint.position.y, 0), Quaternion.identity);
                 enemyAlive++;
                 spawned++;
                 return;
             case 1:
                 toSpawn--;
-                Instantiate(enemies[key - 1], new Vector3(spawnPoint.position.x, spawnPoint.position.y, 0), Quaternion.identity);
+                Instantiate(enemies[key], new Vector3(spawnPoint.position.x, spawnPoint.position.y, 0), Quaternion.identity);
                 enemyAlive++;
                 spawned++;
                 return; 
             case 2:
                 toSpawn--;
-                Instantiate(enemies[key - 1], new Vector3(spawnPoint.position.x, spawnPoint.position.y, 0), Quaternion.identity);
+                Instantiate(enemies[key], new Vector3(spawnPoint.position.x, spawnPoint.position.y, 0), Quaternion.identity);
                 enemyAlive++;
                 spawned++;
                 return;
             case 3:
                 toSpawn--;
-                Instantiate(enemies[key - 1], new Vector3(spawnPoint.position.x, spawnPoint.position.y, 0), Quaternion.identity);
+                Instantiate(enemies[key], new Vector3(spawnPoint.position.x, spawnPoint.position.y, 0), Quaternion.identity);
                 enemyAlive++;
                 spawned++;
                 return;
             case 4:
                 toSpawn--;
-                Instantiate(enemies[key - 1], new Vector3(spawnPoint.position.x, spawnPoint.position.y, 0), Quaternion.identity);
+                Instantiate(enemies[key], new Vector3(spawnPoint.position.x, spawnPoint.position.y, 0), Quaternion.identity);
                 enemyAlive++;
                 spawned++;
                 return;
             case 5:
                 toSpawn--;
-                Instantiate(enemies[key - 1], new Vector3(spawnPoint.position.x, spawnPoint.position.y, 0), Quaternion.identity);
+                Instantiate(enemies[key], new Vector3(spawnPoint.position.x, spawnPoint.position.y, 0), Quaternion.identity);
                 enemyAlive++;
                 spawned++;
                 return;

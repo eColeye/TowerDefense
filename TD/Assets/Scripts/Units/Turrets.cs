@@ -28,9 +28,6 @@ public class Turrets : MonoBehaviour
         Debug.Log("XXX");
     }
 
-
-
-
     //Called when an attack can happen. Attacks first target
     private void DoHit()
     {

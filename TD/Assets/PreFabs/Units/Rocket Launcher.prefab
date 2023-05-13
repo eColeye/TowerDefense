@@ -10,6 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1188482710780462334}
   - component: {fileID: 5032212987947299940}
+  - component: {fileID: 2325563881361228881}
+  - component: {fileID: 4502972835935029115}
+  - component: {fileID: 5095200649466651440}
   m_Layer: 0
   m_Name: Rocket Launcher
   m_TagString: Untagged
@@ -52,6 +55,56 @@ MonoBehaviour:
   blastRadius: 2
   rocketSpeed: 5
   attackSpeed: 4
+  active: 0
+--- !u!114 &2325563881361228881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188482710780462332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 840ef7a32a7fc3c4984e62ca0852da36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!58 &4502972835935029115
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188482710780462332}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.02022782}
+  serializedVersion: 2
+  m_Radius: 0.17298394
+--- !u!50 &5095200649466651440
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188482710780462332}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &7069628104440191233
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,7 +175,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_Sprite: {fileID: 2142311586536479053, guid: 576e8467e5541b447b5adb33d656a3c3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -204,7 +257,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 10
   m_Sprite: {fileID: -8922803724958099555, guid: 576e8467e5541b447b5adb33d656a3c3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

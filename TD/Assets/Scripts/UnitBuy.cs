@@ -21,11 +21,11 @@ public class UnitBuy : MonoBehaviour
     private string objectKey;
 
     public Camera mainCamera;
+    public static bool canPlace = true;
     
-
-
     public void Buy(string key)
     {
+        canPlace = true;
         switch (key)
         {
             //check if have currency before buying
@@ -111,15 +111,6 @@ public class UnitBuy : MonoBehaviour
         }
     }
 
-    private void Change()
-    {
-        if(buyingObject != null)
-        {
-            Destroy(buyingObject);
-            buyingTrans = null; 
-        }
-    }
-
     private void Clicked()
     {
         GameManager.GameMoney -= GameManager.unitCost[objectKey];
@@ -164,8 +155,22 @@ public class UnitBuy : MonoBehaviour
                 buyingTrans = null;
                 return;
         }
+    }
+    private void Change()
+    {
+        if (buyingObject != null)
+        {
+            Destroy(buyingObject);
+            buyingTrans = null;
+        }
+    }
 
-
+    public void Garbage()
+    {
+        Debug.Log("GARBAGE");
+        Destroy(buyingObject);
+        buyingObject = null;
+        buyingTrans = null;
     }
 
     public void Update()
@@ -179,9 +184,10 @@ public class UnitBuy : MonoBehaviour
             //left mouse button was pressed
             if (Input.GetMouseButtonDown(0))
             {
-
-                //check can place
-                Clicked();
+                if (canPlace)
+                {
+                    Clicked();
+                }                
             }
         }
     }
