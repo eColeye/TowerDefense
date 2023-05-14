@@ -19,6 +19,7 @@ public class UnitBuy : MonoBehaviour
     private GameObject buyingObject = null;
     private Transform buyingTrans = null;
     private string objectKey;
+    public GameObject removeText;
 
     public Camera mainCamera;
     public static bool canPlace = true;
@@ -26,6 +27,7 @@ public class UnitBuy : MonoBehaviour
     public void Buy(string key)
     {
         canPlace = true;
+        removeText.SetActive(true);
         switch (key)
         {
             //check if have currency before buying
@@ -107,7 +109,9 @@ public class UnitBuy : MonoBehaviour
                 }
                 return;
 
-            default: return;
+            default:
+                removeText.SetActive(false);
+                return;
         }
     }
 
@@ -188,6 +192,10 @@ public class UnitBuy : MonoBehaviour
                 {
                     Clicked();
                 }                
+            }else if (Input.GetMouseButtonDown(1))
+            {
+                Garbage();
+                removeText.SetActive(false);
             }
         }
     }

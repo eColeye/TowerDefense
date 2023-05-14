@@ -34,10 +34,10 @@ Shop:
 	Buy indevidual Units and place where clicked:
 X		UI
 X		Buttons
-		Buying feature:
+X		Buying feature:
 X			Follows cursor
 X			Left click place
-			Cant place on track
+X			Cant place on track
 X			Costs Money
 X	Play button:
 X		Maybe Auto play next level?
@@ -47,6 +47,7 @@ Units:
 	Can click unit (on click)
 		Sell unit
 		Allows to see attack range on click
+			^ on place
 		Upgrade units
 		
 
